@@ -1,0 +1,1 @@
+this util work with rt2860v2_probe_7620 or compat-wireless-probe.
