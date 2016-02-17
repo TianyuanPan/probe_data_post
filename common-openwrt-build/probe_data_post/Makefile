@@ -35,7 +35,7 @@ define Package/probe_data_post/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/post_mac_probe.sh  $(1)/usr/sbin/post_mac_probe
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/probe_data_post  $(1)/usr/sbin/probe_data_post
 	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/probe_data_post_conf  $(1)/etc/config/probe_data_post_conf
+	$(INSTALL_DATA) ./files/probe_data_post_conf  $(1)/etc/config/probe_data_post_conf
 	$(INSTALL_DIR) $(1)/etc
 	$(INSTALL_DATA) ./files/probe_post_data_counter  $(1)/etc/.probe_post_data_counter
 	$(INSTALL_DIR) $(1)/etc/init.d
