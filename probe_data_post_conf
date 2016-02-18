@@ -1,6 +1,0 @@
-package probe_data_post_conf
-
-config post_conf
-	option url 'http://222.85.149.5:8080/WifiProbe/api/tracker/mac/log/compat'
-	option checkInterval '10'
-

@@ -7,23 +7,23 @@ COUNT_FILE=/etc/.probe_post_data_counter
 URL=""
 CHECK_INTERVAL=10
 DEVICE_ID=""
+
 #
-# Parameter descrption
-# $(1) the Check Interval
+# 
 #
 get_date_to_post_data_file()
 {
-  i=0
-  while [ $i -lt $1 ]
-  do
+#  i=0
+#  while [ $i -lt $1 ]
+#  do
     time=$(date +'%Y-%m-%d %H:%M:%S')
     mact=$(cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2" t"}')
 
    echo -e "${mact//t/$time}" >> $POST_DATA_FILE
 
-    sleep 1
-    i=$(($i +1))
-  done
+#    sleep 1
+#    i=$(($i +1))
+#  done
 }
 
 set_device_id()
@@ -89,11 +89,11 @@ main_loop()
   fi
   while [ true ]                                                            
   do                                                                        
-    get_date_to_post_data_file $1                                           
+    get_date_to_post_data_file                                           
     make_json_data 
     post_data_to_server $2                                
     rm -rf  $POST_DATA_FILE
-    sleep 1
+    sleep $1
   done                                                                                                                        
 }                                                                                                                             
 
