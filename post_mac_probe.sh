@@ -16,8 +16,9 @@ get_date_to_post_data_file()
 #  i=0
 #  while [ $i -lt $1 ]
 #  do
-    time=$(date +'%Y-%m-%d %H:%M:%S')
-    mact=$(cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2" t"}')
+   echo "" > $POST_DATA_FILE
+   time=$(date +'%Y-%m-%d %H:%M:%S')
+   mact=$(cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2" t"}')
 
    echo -e "${mact//t/$time}" >> $POST_DATA_FILE
 
@@ -58,7 +59,7 @@ make_json_data()
 #                                                                                                                             
 post_data_to_server()                                                       
 {                                                                      
-  curl -0 -d "$(cat $POST_DATA_FILE)" $1   &> /dev/null                
+  curl --connetc-timeout 30 -m 30 -d "$(cat $POST_DATA_FILE)" $1   &> /dev/null                
 #  echo "f3: $(cat $POST_DATA_FILE)"                                   
 } 
 
