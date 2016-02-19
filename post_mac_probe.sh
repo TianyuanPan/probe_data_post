@@ -59,7 +59,7 @@ make_json_data()
 #                                                                                                                             
 post_data_to_server()                                                       
 {                                                                      
-  curl --connetc-timeout 30 -m 30 -d "$(cat $POST_DATA_FILE)" $1   &> /dev/null                
+  curl --connect-timeout 30 -m 30 -d ''"$(cat $POST_DATA_FILE)"'' $1   &> /dev/null                
 #  echo "f3: $(cat $POST_DATA_FILE)"                                   
 } 
 
