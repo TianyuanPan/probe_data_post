@@ -13,18 +13,11 @@ DEVICE_ID=""
 #
 get_date_to_post_data_file()
 {
-#  i=0
-#  while [ $i -lt $1 ]
-#  do
-   echo "" > $POST_DATA_FILE
-   time=$(date +'%Y-%m-%d %H:%M:%S')
-   mact=$(cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2" t"}')
-
-   echo -e "${mact//t/$time}" >> $POST_DATA_FILE
-
-#    sleep 1
-#    i=$(($i +1))
-#  done
+  tmp=/tmp/.tmpdat_
+  echo "" > $POST_DATA_FILE
+  time=$(date +'%Y-%m-%d %H:%M:%S') 
+  cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2" t"}' > $tmp 
+  while read line; do echo ${line//t/$time} >> $POST_DATA_FILE; done < $tmp 
 }
 
 set_device_id()
