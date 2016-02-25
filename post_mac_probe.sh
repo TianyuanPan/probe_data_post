@@ -21,7 +21,7 @@ get_date_to_post_data_file()
 
 set_device_id()
 {
-   DEVICE_ID=$(ifconfig|grep -e eth0|awk '{print $NF}'|tr -d ":"|tr [a-z] [A-Z])
+   DEVICE_ID=$(ifconfig|grep -e eth0|sed -n "1p" | awk '{print $NF}'|tr -d ":"|tr [a-z] [A-Z])
 }
 
 make_json_data()                                                       
