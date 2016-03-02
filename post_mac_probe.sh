@@ -15,7 +15,7 @@ get_date_to_post_data_file()
 {
   tmp=/tmp/.tmpdat_
   cat /dev/null > $POST_DATA_FILE 
-  cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2}' > $tmp 
+  cat $PROBE_MAC_FILE | grep -v 00:00:00:00:00:00 | awk '{print $1,$2,$3}' > $tmp 
   while read line; do echo "$line" >> $POST_DATA_FILE; done < $tmp 
 }
 
@@ -45,14 +45,14 @@ make_json_data()
   
   while read line
   do 
-    json_tmp=$(echo $line | awk '{print "{\"mac\":\""$2"\",","\"rssi\":"$1"},"}')
+    json_tmp=$(echo $line | awk '{print "{\"mac\":\""$2"\",","\"rssi\":"$1",\"us_timespec\":"$3"},"}')
     json_tmp2="$json_tmp2$json_tmp"
     json_tmp=""
   done < $tmp
   
  json_data="$json_data$json_tmp2"                                      
  json_data="${json_data%,}]}"                            
- rm -f $tmp                                              
+# rm -f $tmp                                              
  echo "$json_data"  > $POST_DATA_FILE                    
 }                                                  
                                                
